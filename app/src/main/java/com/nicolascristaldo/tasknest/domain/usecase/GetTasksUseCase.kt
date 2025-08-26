@@ -1,9 +1,9 @@
 package com.nicolascristaldo.tasknest.domain.usecase
 
-import com.nicolascristaldo.tasknest.data.repository.TaskRepository
 import com.nicolascristaldo.tasknest.domain.model.Category
 import com.nicolascristaldo.tasknest.domain.model.Status
 import com.nicolascristaldo.tasknest.domain.model.Task
+import com.nicolascristaldo.tasknest.domain.repository.TaskRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

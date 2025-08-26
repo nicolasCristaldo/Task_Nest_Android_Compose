@@ -7,6 +7,7 @@ import com.nicolascristaldo.tasknest.data.room.dao.TaskDAO
 import com.nicolascristaldo.tasknest.domain.model.Category
 import com.nicolascristaldo.tasknest.domain.model.Status
 import com.nicolascristaldo.tasknest.domain.model.Task
+import com.nicolascristaldo.tasknest.domain.repository.TaskRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -14,38 +15,38 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**
- * Repository class for managing tasks.
+ * Repository for managing tasks in the database.
  * @property taskDAO The DAO for tasks.
  */
-class TaskRepository @Inject constructor(
+class TaskRepositoryImpl @Inject constructor(
     private val taskDAO: TaskDAO
-) {
+): TaskRepository {
     /**
      * Inserts a task into the database.
      * @param task The task to insert.
      */
-    suspend fun insert(task: Task) =
+    override suspend fun insert(task: Task) =
         withContext(Dispatchers.IO) { taskDAO.insert(task.toEntity()) }
 
     /**
      * Updates a task in the database.
      * @param task The task to update.
      */
-    suspend fun update(task: Task) =
+    override suspend fun update(task: Task) =
         withContext(Dispatchers.IO) { taskDAO.update(task.toEntity()) }
 
     /**
      * Deletes a task from the database.
      * @param task The task to delete.
      */
-    suspend fun delete(task: Task) =
+    override suspend fun delete(task: Task) =
         withContext(Dispatchers.IO) { taskDAO.delete(task.toEntity()) }
 
     /**
      * Retrieves all tasks from the database.
      * @return A [Flow] emitting a list of all tasks.
      */
-    fun getAllTasks(): Flow<List<Task>> =
+    override fun getAllTasks(): Flow<List<Task>> =
         taskDAO.getAllTasks().map { it.toDomainList() }
 
     /**
@@ -53,7 +54,7 @@ class TaskRepository @Inject constructor(
      * @param id The id of the task.
      * @return A [Flow] emitting the task.
      */
-    fun getTaskById(id: Int): Flow<Task> =
+    override fun getTaskById(id: Int): Flow<Task> =
         taskDAO.getTaskById(id).map { it.toDomain() }
 
     /**
@@ -61,7 +62,7 @@ class TaskRepository @Inject constructor(
      * @param name The text to search for.
      * @return A [Flow] emitting a list of matching tasks.
      */
-    fun getTasksByName(name: String): Flow<List<Task>> =
+    override fun getTasksByName(name: String): Flow<List<Task>> =
         taskDAO.getTasksByName(name).map { it.toDomainList() }
 
     /**
@@ -69,7 +70,7 @@ class TaskRepository @Inject constructor(
      * @param category The [Category] of the task.
      * @return A [Flow] emitting a list of the tasks with the specified category.
      */
-    fun getTasksByCategory(category: Category): Flow<List<Task>> =
+    override fun getTasksByCategory(category: Category): Flow<List<Task>> =
         taskDAO.getTasksByCategory(category).map { it.toDomainList() }
 
     /**
@@ -77,6 +78,6 @@ class TaskRepository @Inject constructor(
      * @param status The [Status] of the task.
      * @return A [Flow] emitting a list of the tasks with the specified status.
      */
-    fun getTasksByStatus(status: Status): Flow<List<Task>> =
+    override fun getTasksByStatus(status: Status): Flow<List<Task>> =
         taskDAO.getTasksByStatus(status).map { it.toDomainList() }
 }

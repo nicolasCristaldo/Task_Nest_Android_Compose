@@ -1,7 +1,7 @@
 package com.nicolascristaldo.tasknest.domain.usecase
 
-import com.nicolascristaldo.tasknest.data.repository.TaskRepository
 import com.nicolascristaldo.tasknest.domain.model.Task
+import com.nicolascristaldo.tasknest.domain.repository.TaskRepository
 import javax.inject.Inject
 
 /**
