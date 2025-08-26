@@ -7,6 +7,8 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.nicolascristaldo.tasknest.data.room.entity.TaskEntity
+import com.nicolascristaldo.tasknest.domain.model.Category
+import com.nicolascristaldo.tasknest.domain.model.Status
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -60,17 +62,17 @@ interface TaskDAO {
 
     /**
      * Retrieves tasks by their category.
-     * @param category The category of the task.
+     * @param category The [Category] of the task.
      * @return A [Flow] emitting a list of the tasks with the specified category.
      */
     @Query("SELECT * FROM tasks WHERE category = :category")
-    fun getTasksByCategory(category: String): Flow<List<TaskEntity>>
+    fun getTasksByCategory(category: Category): Flow<List<TaskEntity>>
 
     /**
      * Retrieves tasks by their status.
-     * @param status The status of the task.
+     * @param status The [Status] of the task.
      * @return A [Flow] emitting a list of the tasks with the specified status.
      */
     @Query("SELECT * FROM tasks WHERE status = :status")
-    fun getTasksByStatus(status: String): Flow<List<TaskEntity>>
+    fun getTasksByStatus(status: Status): Flow<List<TaskEntity>>
 }
