@@ -1,18 +1,16 @@
-package com.nicolascristaldo.tasknest.ui.screens.home
+package com.nicolascristaldo.tasknest.ui.screens.form
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun HomeScreen(
-    onNavigateToEditTask: () -> Unit,
-    onNavigateToTaskDetails: (Int) -> Unit,
+fun TaskFormScreen(
+    text: String,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -20,13 +18,6 @@ fun HomeScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.fillMaxSize()
     ) {
-        Text(text = "Home Screen")
-
-        Button(onClick = onNavigateToEditTask ) {
-            Text(text = "edit task")
-        }
-        Button(onClick = { onNavigateToTaskDetails(1) }) {
-            Text(text = "View Task Details")
-        }
+        Text(text = text)
     }
 }
