@@ -34,8 +34,10 @@ fun TaskNestNavHost(
             arguments = listOf(navArgument("taskId") { type = NavType.IntType })
         ) { backStackEntry ->
             val taskId = backStackEntry.arguments?.getInt("taskId") ?: 0
+
             TaskFormScreen(
-                text = if (taskId == 0) "Create Task" else "Edit Task"
+                id = taskId,
+                onNavigateBack = { navController.navigateUp() }
             )
         }
 

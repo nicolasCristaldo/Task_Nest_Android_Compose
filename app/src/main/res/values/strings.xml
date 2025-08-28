@@ -9,4 +9,7 @@
     <string name="back_button">Back</string>
     <string name="add_task">Add Task</string>
 
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+
 </resources>
