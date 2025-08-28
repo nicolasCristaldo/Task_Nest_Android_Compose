@@ -50,7 +50,7 @@ interface TaskDAO {
      * @return A [Flow] emitting the task.
      */
     @Query("SELECT * FROM tasks WHERE id = :id")
-    fun getTaskById(id: Int): Flow<TaskEntity>
+    fun getTaskById(id: Int): Flow<TaskEntity?>
 
     /**
      * Retrieves tasks whose names contain the specified text.

@@ -13,7 +13,7 @@ interface TaskRepository {
     suspend fun update(task: Task)
     suspend fun delete(task: Task)
     fun getAllTasks(): Flow<List<Task>>
-    fun getTaskById(id: Int): Flow<Task>
+    fun getTaskById(id: Int): Flow<Task?>
     fun getTasksByName(name: String): Flow<List<Task>>
     fun getTasksByCategory(category: Category): Flow<List<Task>>
     fun getTasksByStatus(status: Status): Flow<List<Task>>

@@ -9,6 +9,7 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -27,7 +28,7 @@ fun TaskFormScreen(
         if (id != 0) viewModel.getTask(id)
     }
 
-    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -35,25 +36,25 @@ fun TaskFormScreen(
         modifier = modifier.fillMaxSize()
     ) {
         OutlinedTextField(
-            value = uiState.value.taskDetails.name,
-            onValueChange = { viewModel.updateUiState(uiState.value.taskDetails.copy(name = it)) },
+            value = uiState.taskDetails.name,
+            onValueChange = { viewModel.updateUiState(uiState.taskDetails.copy(name = it)) },
             label = { Text(stringResource(R.string.name)) }
         )
 
         OutlinedTextField(
-            value = uiState.value.taskDetails.description,
-            onValueChange = { viewModel.updateUiState(uiState.value.taskDetails.copy(description = it)) },
+            value = uiState.taskDetails.description,
+            onValueChange = { viewModel.updateUiState(uiState.taskDetails.copy(description = it)) },
             label = { Text(stringResource(R.string.description)) }
         )
 
 
 
         Switch(
-           checked = uiState.value.taskDetails.isNotificationEnabled,
+           checked = uiState.taskDetails.isNotificationEnabled,
             onCheckedChange = {
                 viewModel.updateUiState(
-                    uiState.value.taskDetails.copy(
-                        isNotificationEnabled = !uiState.value.taskDetails.isNotificationEnabled
+                    uiState.taskDetails.copy(
+                        isNotificationEnabled = !uiState.taskDetails.isNotificationEnabled
                     )
                 )
             }
@@ -65,15 +66,15 @@ fun TaskFormScreen(
                 else viewModel.updateTask()
                 onNavigateBack()
             },
-            enabled = uiState.value.isEntryValid()
+            enabled = uiState.isEntryValid()
         ) {
             Text(
                 stringResource(if (id == 0) R.string.create else R.string.edit)
             )
         }
 
-        if (uiState.value.error != null) {
-            Text(text = uiState.value.error!!)
+        if (uiState.error != null) {
+            Text(text = uiState.error!!)
         }
     }
 }

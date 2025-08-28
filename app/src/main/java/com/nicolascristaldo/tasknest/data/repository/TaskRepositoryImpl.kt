@@ -54,8 +54,8 @@ class TaskRepositoryImpl @Inject constructor(
      * @param id The id of the task.
      * @return A [Flow] emitting the task.
      */
-    override fun getTaskById(id: Int): Flow<Task> =
-        taskDAO.getTaskById(id).map { it.toDomain() }
+    override fun getTaskById(id: Int): Flow<Task?> =
+        taskDAO.getTaskById(id).map { it?.toDomain() }
 
     /**
      * Retrieves tasks whose names contain the specified text.

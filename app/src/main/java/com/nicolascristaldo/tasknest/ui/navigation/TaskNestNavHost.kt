@@ -46,7 +46,12 @@ fun TaskNestNavHost(
             arguments = listOf(navArgument("taskId") { type = NavType.IntType })
         ) { backStackEntry ->
             val taskId = backStackEntry.arguments?.getInt("taskId") ?: 0
-            TaskDetailsScreen()
+
+            TaskDetailsScreen(
+                id = taskId,
+                onNavigateToTaskForm = { navController.navigate(AppDestinations.TaskForm.createRoute(taskId)) },
+                onNavigateBack = { navController.navigateUp() }
+            )
         }
     }
 }
