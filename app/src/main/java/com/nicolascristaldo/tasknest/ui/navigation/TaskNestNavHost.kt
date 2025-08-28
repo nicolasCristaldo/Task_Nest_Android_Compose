@@ -23,9 +23,6 @@ fun TaskNestNavHost(
     ) {
         composable(route = AppDestinations.Home.route) {
             HomeScreen(
-                onNavigateToEditTask = {
-                    navController.navigate(AppDestinations.TaskForm.createRoute(1))
-                },
                 onNavigateToTaskDetails = { taskId ->
                     navController.navigate(AppDestinations.TaskDetails.createRoute(taskId))
                 }
@@ -42,7 +39,11 @@ fun TaskNestNavHost(
             )
         }
 
-        composable(route = AppDestinations.TaskDetails.route) {
+        composable(
+            route = AppDestinations.TaskDetails.route,
+            arguments = listOf(navArgument("taskId") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val taskId = backStackEntry.arguments?.getInt("taskId") ?: 0
             TaskDetailsScreen()
         }
     }
