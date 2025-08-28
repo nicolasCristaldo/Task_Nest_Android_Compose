@@ -29,7 +29,9 @@ class DetailsViewModel @Inject constructor(
      * @param id The id of the task.
      */
     fun getTask(id: Int) = viewModelScope.launch {
-        getTaskByIdUseCase(id).collect { task -> _task.value = task }
+        getTaskByIdUseCase(id).collect { task ->
+            _task.value = task
+        }
     }
 
     /**
