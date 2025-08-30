@@ -3,6 +3,8 @@ package com.nicolascristaldo.tasknest.ui.screens.form
 import com.nicolascristaldo.tasknest.domain.model.Category
 import com.nicolascristaldo.tasknest.domain.model.Status
 import com.nicolascristaldo.tasknest.domain.model.Task
+import java.util.Calendar
+import java.util.TimeZone
 
 /**
  * Represents the UI state for the TaskFormScreen.
@@ -26,10 +28,25 @@ data class FormUiState(
     fun isDescriptionValid(): Boolean = taskDetails.description.length <= 200
 
     /**
+     * Checks if the date of the task is valid.
+     * @return `true` if the date is not in the past or null, otherwise `false`.
+     */
+    fun isDateValid(): Boolean = if (taskDetails.date != null) {
+        val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC")).apply {
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }
+        val todayStartMillis = calendar.timeInMillis
+        taskDetails.date >= todayStartMillis
+    } else { true }
+
+    /**
      * Checks if the form is in a valid state.
      * @return `true` if both the name and description are valid, otherwise `false`.
      */
-    fun isEntryValid(): Boolean = isNameValid() && isDescriptionValid()
+    fun isEntryValid(): Boolean = isNameValid() && isDescriptionValid() && isDateValid()
 }
 
 /**

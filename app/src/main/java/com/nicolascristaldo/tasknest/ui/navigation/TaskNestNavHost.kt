@@ -1,7 +1,11 @@
 package com.nicolascristaldo.tasknest.ui.navigation
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -37,7 +41,10 @@ fun TaskNestNavHost(
 
             TaskFormScreen(
                 id = taskId,
-                onNavigateBack = { navController.navigateUp() }
+                onNavigateBack = { navController.navigateUp() },
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxSize()
             )
         }
 

@@ -11,5 +11,18 @@
 
     <string name="name">Name</string>
     <string name="description">Description</string>
+    <string name="date">Date</string>
+
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="select_date">Select Date</string>
+    <string name="name_error">Name must be between 1 and 30 characters.</string>
+    <string name="description_error">Description too long.</string>
+    <string name="date_error">Date must not be in the past.</string>
+    <string name="limit_characters">Limit: %d/%d"</string>
+    <string name="select_category">Select a category</string>
+    <string name="enable_notifications">Enable notifications</string>
+
 
 </resources>

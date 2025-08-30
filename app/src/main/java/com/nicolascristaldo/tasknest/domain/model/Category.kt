@@ -5,9 +5,9 @@ package com.nicolascristaldo.tasknest.domain.model
  * @property color the associated color of the category.
  */
 enum class Category(val color: Int) {
-    PERSONAL(color = 0x90EE90.toInt()),
-    WORK(color = 0xFF87CEFA.toInt()),
-    SHOPPING(color = 0xFF69B4.toInt()),
-    URGENT(color = 0xFF0000.toInt()),
-    OTHER(color = 0xFFD3D3D3.toInt())
+    PERSONAL(color = 0xFF5EB420.toInt()),
+    WORK(color = 0xFF34A0E8.toInt()),
+    SHOPPING(color = 0xFFE38E11.toInt()),
+    URGENT(color = 0xFFF33F3F.toInt()),
+    OTHER(color = 0xFFCC24E7.toInt())
 }

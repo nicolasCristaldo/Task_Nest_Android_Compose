@@ -1,22 +1,33 @@
 package com.nicolascristaldo.tasknest.ui.screens.form
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Switch
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nicolascristaldo.tasknest.R
+import com.nicolascristaldo.tasknest.ui.components.AppTextField
+import com.nicolascristaldo.tasknest.ui.screens.form.components.CategoryChipsSection
+import com.nicolascristaldo.tasknest.ui.screens.form.components.DatePickerTextField
+import com.nicolascristaldo.tasknest.ui.screens.form.components.NotificationSwitchSection
+import com.nicolascristaldo.tasknest.ui.screens.form.components.TaskDatePickerDialog
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TaskFormScreen(
     id: Int,
@@ -29,52 +40,113 @@ fun TaskFormScreen(
     }
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    var showDatePicker by remember { mutableStateOf(false) }
 
-    Column(
+    TaskFormBody(
+        confirmButtonText = if (id == 0) stringResource(R.string.create)
+        else stringResource(R.string.edit),
+        onConfirm = {
+            if (id == 0) viewModel.saveTask() else viewModel.updateTask()
+            onNavigateBack()
+        },
+        uiState = uiState,
+        updateUiState = viewModel::updateUiState,
+        changeDatePicerState = { showDatePicker = it },
+        modifier = modifier
+    )
+
+    if (showDatePicker) {
+        TaskDatePickerDialog(
+            date = uiState.taskDetails.date,
+            onConfirm = {
+                viewModel.updateUiState(uiState.taskDetails.copy(date = it))
+            },
+            onDismiss = { showDatePicker = false }
+        )
+    }
+}
+
+@Composable
+fun TaskFormBody(
+    confirmButtonText: String,
+    onConfirm: () -> Unit,
+    uiState: FormUiState,
+    updateUiState: (TaskDetails) -> Unit,
+    changeDatePicerState: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    LazyColumn(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.fillMaxSize()
-    ) {
-        OutlinedTextField(
-            value = uiState.taskDetails.name,
-            onValueChange = { viewModel.updateUiState(uiState.taskDetails.copy(name = it)) },
-            label = { Text(stringResource(R.string.name)) }
-        )
-
-        OutlinedTextField(
-            value = uiState.taskDetails.description,
-            onValueChange = { viewModel.updateUiState(uiState.taskDetails.copy(description = it)) },
-            label = { Text(stringResource(R.string.description)) }
-        )
-
-
-
-        Switch(
-           checked = uiState.taskDetails.isNotificationEnabled,
-            onCheckedChange = {
-                viewModel.updateUiState(
-                    uiState.taskDetails.copy(
-                        isNotificationEnabled = !uiState.taskDetails.isNotificationEnabled
-                    )
-                )
-            }
-        )
-
-        Button(
-            onClick = {
-                if (id == 0) viewModel.saveTask()
-                else viewModel.updateTask()
-                onNavigateBack()
-            },
-            enabled = uiState.isEntryValid()
-        ) {
-            Text(
-                stringResource(if (id == 0) R.string.create else R.string.edit)
+        modifier = modifier
+    ){
+        item {
+            AppTextField(
+                label = stringResource(R.string.name),
+                value = uiState.taskDetails.name,
+                onValueChange = { updateUiState(uiState.taskDetails.copy(name = it)) },
+                limit = 30,
+                isError = !uiState.isNameValid(),
+                errorMessage = stringResource(R.string.name_error),
+                modifier = Modifier.fillMaxWidth(.8f)
             )
-        }
 
-        if (uiState.error != null) {
-            Text(text = uiState.error!!)
+            Spacer(modifier = Modifier.height(16.dp))
+
+            AppTextField(
+                label = stringResource(R.string.description),
+                value = uiState.taskDetails.description,
+                onValueChange = { updateUiState(uiState.taskDetails.copy(description = it)) },
+                limit = 200,
+                isError = !uiState.isDescriptionValid(),
+                errorMessage = stringResource(R.string.description_error),
+                modifier = Modifier.fillMaxWidth(.8f)
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            DatePickerTextField(
+                label = stringResource(R.string.date),
+                value = uiState.taskDetails.date,
+                isError = !uiState.isDateValid(),
+                errorMessage = stringResource(R.string.date_error),
+                onClick = { changeDatePicerState(true) },
+                modifier = Modifier.fillMaxWidth(.8f)
+            )
+
+            Spacer(modifier = Modifier.height(34.dp))
+
+            NotificationSwitchSection(
+                checked = uiState.taskDetails.isNotificationEnabled,
+                onCheckedChange = {
+                    updateUiState(
+                        uiState.taskDetails.copy(
+                            isNotificationEnabled = !uiState.taskDetails.isNotificationEnabled
+                        )
+                    )
+                },
+                modifier = Modifier.fillMaxWidth(.8f)
+            )
+
+            Spacer(modifier = Modifier.height(34.dp))
+
+            CategoryChipsSection(
+                selectedCategory = uiState.taskDetails.category,
+                onCategorySelected = { updateUiState(uiState.taskDetails.copy(category = it)) }
+            )
+
+            Spacer(modifier = Modifier.height(64.dp))
+
+            Button(
+                onClick = { onConfirm() },
+                enabled = uiState.isEntryValid()
+            ) {
+                Text(confirmButtonText)
+            }
+
+            if (uiState.error != null) {
+                Text(text = uiState.error)
+            }
         }
     }
 }
