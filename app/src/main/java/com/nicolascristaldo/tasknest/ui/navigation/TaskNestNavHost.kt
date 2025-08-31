@@ -1,7 +1,6 @@
 package com.nicolascristaldo.tasknest.ui.navigation
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -29,7 +28,10 @@ fun TaskNestNavHost(
             HomeScreen(
                 onNavigateToTaskDetails = { taskId ->
                     navController.navigate(AppDestinations.TaskDetails.createRoute(taskId))
-                }
+                },
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxSize()
             )
         }
 

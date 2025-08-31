@@ -1,9 +1,10 @@
 package com.nicolascristaldo.tasknest.ui.screens.home
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
@@ -14,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.nicolascristaldo.tasknest.ui.screens.home.components.TaskCard
 
 @Composable
 fun HomeScreen(
@@ -26,7 +28,7 @@ fun HomeScreen(
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
     ) {
         when {
             uiState.isLoading -> {
@@ -41,11 +43,12 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxSize()
                 ) {
                     items(uiState.tasks, key = { it.id }) { task ->
-                        Text(
-                            task.name,
-                            modifier = Modifier.clickable {
-                                onNavigateToTaskDetails(task.id)
-                            }
+                        TaskCard(
+                            task = task,
+                            onClick = { onNavigateToTaskDetails(task.id) },
+                            modifier = Modifier
+                                .padding(vertical = 8.dp)
+                                .fillMaxWidth()
                         )
                     }
                 }
