@@ -19,9 +19,9 @@ import com.nicolascristaldo.tasknest.ui.screens.home.components.TaskCard
 
 @Composable
 fun HomeScreen(
+    modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
-    onNavigateToTaskDetails: (Int) -> Unit,
-    modifier: Modifier = Modifier
+    onNavigateToTaskDetails: (Int) -> Unit
 ) {
     val uiState = viewModel.uiState.collectAsState().value
 

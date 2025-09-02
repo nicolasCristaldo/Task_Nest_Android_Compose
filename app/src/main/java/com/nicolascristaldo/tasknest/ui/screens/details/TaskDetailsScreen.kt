@@ -1,17 +1,36 @@
 package com.nicolascristaldo.tasknest.ui.screens.details
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Button
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.nicolascristaldo.tasknest.R
+import com.nicolascristaldo.tasknest.domain.model.Task
+import com.nicolascristaldo.tasknest.ui.screens.details.components.DeleteTaskDialog
+import com.nicolascristaldo.tasknest.ui.screens.details.components.DetailsButtons
+import com.nicolascristaldo.tasknest.ui.screens.details.components.StatusRow
 
 @Composable
 fun TaskDetailsScreen(
@@ -26,33 +45,94 @@ fun TaskDetailsScreen(
     }
 
     val task by viewModel.task.collectAsStateWithLifecycle()
+    var showDeleteDialog by remember { mutableStateOf(false) }
 
     if (task != null) {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
+        TaskDetailsBody(
+            task = task!!,
+            onNavigateToTaskForm = onNavigateToTaskForm,
+            onDeleteTaskClick = { showDeleteDialog = true },
+            onStatusChange = { viewModel.changeStatus() },
+            modifier = modifier
+        )
+    } else {
+        Box(
+            contentAlignment = Alignment.Center,
             modifier = modifier.fillMaxSize()
         ) {
-            Text(text = "name: ${task?.name ?: ""}")
-            Text(text = "description: ${task?.description ?: ""}")
-            Text(text = "isNotificationEnabled: ${task?.isNotificationEnabled ?: ""}")
-            Text(text = "category: ${task?.category ?: ""}")
-            Text(text = "status: ${task?.status ?: ""}")
+            Text(text = stringResource(R.string.task_not_found))
+        }
+    }
 
-            Button(
-                onClick = {
-                    viewModel.deleteTask()
-                    onNavigateBack()
-                }
-            ) {
-                Text(text = "Delete")
+    if (showDeleteDialog) {
+        DeleteTaskDialog(
+            onDismiss = { showDeleteDialog = false },
+            onConfirm = {
+                viewModel.deleteTask()
+                onNavigateBack()
             }
+        )
+    }
+}
 
-            Button(
-                onClick = { onNavigateToTaskForm() }
+@Composable
+fun TaskDetailsBody(
+    task: Task,
+    onNavigateToTaskForm: () -> Unit,
+    onStatusChange: () -> Unit,
+    onDeleteTaskClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+    ) {
+
+        Text(text = "Category: ${task.category.name}")
+
+        Text(text = task.name)
+
+        task.description?.let {
+            Spacer(modifier = Modifier.padding(16.dp))
+
+            Text(text = it)
+        }
+
+        task.date?.let {
+            Spacer(modifier = Modifier.padding(16.dp))
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.align(Alignment.End)
             ) {
-                Text(text = "Edit")
+                Icon(
+                    imageVector = Icons.Filled.DateRange,
+                    contentDescription = null
+                )
+                Text(
+                    text = task.date.toString()
+                )
             }
         }
+
+        Spacer(modifier = Modifier.padding(4.dp))
+
+        HorizontalDivider(color = Color(task.category.color))
+
+        Spacer(modifier = Modifier.padding(16.dp))
+
+        StatusRow(
+            status = task.status,
+            onStatusChange = onStatusChange,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.padding(16.dp))
+
+        DetailsButtons(
+            onNavigateToTaskForm = onNavigateToTaskForm,
+            onDeleteTaskClick = onDeleteTaskClick,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }

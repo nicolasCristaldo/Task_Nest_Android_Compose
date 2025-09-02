@@ -44,9 +44,7 @@ fun TaskNestNavHost(
             TaskFormScreen(
                 id = taskId,
                 onNavigateBack = { navController.navigateUp() },
-                modifier = Modifier
-                    .padding(8.dp)
-                    .fillMaxSize()
+                modifier = Modifier.fillMaxSize()
             )
         }
 
@@ -59,7 +57,10 @@ fun TaskNestNavHost(
             TaskDetailsScreen(
                 id = taskId,
                 onNavigateToTaskForm = { navController.navigate(AppDestinations.TaskForm.createRoute(taskId)) },
-                onNavigateBack = { navController.navigateUp() }
+                onNavigateBack = { navController.navigateUp() },
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxSize()
             )
         }
     }
