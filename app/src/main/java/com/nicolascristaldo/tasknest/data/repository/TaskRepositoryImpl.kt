@@ -4,8 +4,6 @@ import com.nicolascristaldo.tasknest.data.mapper.toDomain
 import com.nicolascristaldo.tasknest.data.mapper.toDomainList
 import com.nicolascristaldo.tasknest.data.mapper.toEntity
 import com.nicolascristaldo.tasknest.data.room.dao.TaskDAO
-import com.nicolascristaldo.tasknest.domain.model.Category
-import com.nicolascristaldo.tasknest.domain.model.Status
 import com.nicolascristaldo.tasknest.domain.model.Task
 import com.nicolascristaldo.tasknest.domain.repository.TaskRepository
 import kotlinx.coroutines.Dispatchers
@@ -64,20 +62,4 @@ class TaskRepositoryImpl @Inject constructor(
      */
     override fun getTasksByName(name: String): Flow<List<Task>> =
         taskDAO.getTasksByName(name).map { it.toDomainList() }
-
-    /**
-     * Retrieves tasks by their category.
-     * @param category The [Category] of the task.
-     * @return A [Flow] emitting a list of the tasks with the specified category.
-     */
-    override fun getTasksByCategory(category: Category): Flow<List<Task>> =
-        taskDAO.getTasksByCategory(category).map { it.toDomainList() }
-
-    /**
-     * Retrieves tasks by their status.
-     * @param status The [Status] of the task.
-     * @return A [Flow] emitting a list of the tasks with the specified status.
-     */
-    override fun getTasksByStatus(status: Status): Flow<List<Task>> =
-        taskDAO.getTasksByStatus(status).map { it.toDomainList() }
 }

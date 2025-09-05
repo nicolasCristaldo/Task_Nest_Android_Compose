@@ -1,6 +1,5 @@
 package com.nicolascristaldo.tasknest.ui.screens.home
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,6 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.nicolascristaldo.tasknest.domain.model.Task
+import com.nicolascristaldo.tasknest.ui.components.AppTextField
 import com.nicolascristaldo.tasknest.ui.screens.home.components.TaskCard
 
 @Composable
@@ -26,32 +27,52 @@ fun HomeScreen(
     val uiState = viewModel.uiState.collectAsState().value
 
     Column(
-        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
+        AppTextField(
+            value = uiState.nameFilter ?: "",
+            onValueChange = { viewModel.setNameFilter(it) },
+            label = "Search",
+            modifier = Modifier.fillMaxWidth(.8f)
+        )
+
         when {
-            uiState.isLoading -> {
-                CircularProgressIndicator()
+            uiState.isLoading -> CircularProgressIndicator()
+            uiState.error != null -> Text(text = uiState.error)
+            else -> TaskList(
+                tasks = uiState.tasks,
+                onCardClick = onNavigateToTaskDetails,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+    }
+}
+
+@Composable
+fun TaskList(
+    tasks: List<Task>,
+    onCardClick: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    LazyColumn(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+    ) {
+        if (tasks.isEmpty()) {
+            item {
+                Text(text = "No tasks found")
             }
-            uiState.error != null -> {
-                Text(text = uiState.error)
-            }
-            else -> {
-                LazyColumn(
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    items(uiState.tasks, key = { it.id }) { task ->
-                        TaskCard(
-                            task = task,
-                            onClick = { onNavigateToTaskDetails(task.id) },
-                            modifier = Modifier
-                                .padding(vertical = 8.dp)
-                                .fillMaxWidth()
-                        )
-                    }
-                }
+        }
+        else {
+            items(tasks, key = { it.id }) { task ->
+                TaskCard(
+                    task = task,
+                    onClick = { onCardClick(task.id) },
+                    modifier = Modifier
+                        .padding(vertical = 8.dp)
+                        .fillMaxWidth()
+                )
             }
         }
     }
