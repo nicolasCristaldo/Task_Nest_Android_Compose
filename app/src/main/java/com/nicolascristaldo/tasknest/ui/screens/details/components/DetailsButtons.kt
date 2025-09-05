@@ -1,16 +1,17 @@
 package com.nicolascristaldo.tasknest.ui.screens.details.components
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.nicolascristaldo.tasknest.R
+import com.nicolascristaldo.tasknest.ui.navigation.components.TaskNestFAB
 
 @Composable
 fun DetailsButtons(
@@ -18,27 +19,22 @@ fun DetailsButtons(
     onDeleteTaskClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceEvenly,
+    Column(
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
-        OutlinedButton(
-            onClick = { onNavigateToTaskForm() }
-        ) {
-            Text(text = stringResource(R.string.edit))
-        }
+        TaskNestFAB(
+            onClick = onDeleteTaskClick,
+            icon = Icons.Filled.Delete,
+            contentDescription = R.string.delete_task,
+            modifier = Modifier.size(40.dp)
+        )
 
-        OutlinedButton(
-            onClick = { onDeleteTaskClick() },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.errorContainer
-            )
-        ) {
-            Text(
-                text = stringResource(R.string.delete),
-                color = MaterialTheme.colorScheme.error
-            )
-        }
+        TaskNestFAB(
+            onClick = onNavigateToTaskForm,
+            icon = Icons.Filled.Edit,
+            contentDescription = R.string.edit
+        )
     }
 }

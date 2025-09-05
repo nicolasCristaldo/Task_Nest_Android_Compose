@@ -1,17 +1,13 @@
 package com.nicolascristaldo.tasknest.ui.screens.details
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -23,11 +19,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nicolascristaldo.tasknest.R
 import com.nicolascristaldo.tasknest.domain.model.Task
+import com.nicolascristaldo.tasknest.ui.components.DateWithIcon
 import com.nicolascristaldo.tasknest.ui.screens.details.components.DeleteTaskDialog
 import com.nicolascristaldo.tasknest.ui.screens.details.components.DetailsButtons
 import com.nicolascristaldo.tasknest.ui.screens.details.components.StatusRow
@@ -87,37 +85,36 @@ fun TaskDetailsBody(
         modifier = modifier
     ) {
 
-        Text(text = "Category: ${task.category.name}")
+        Text(
+            text = task.category.name,
+            style = MaterialTheme.typography.labelLarge,
+            color = Color(task.category.color)
+        )
 
-        Text(text = task.name)
+        Text(
+            text = task.name,
+            style = MaterialTheme.typography.headlineMedium,
+            fontWeight = FontWeight.Bold
+        )
 
         task.description?.let {
-            Spacer(modifier = Modifier.padding(16.dp))
+            Spacer(modifier = Modifier.padding(8.dp))
 
             Text(text = it)
         }
 
-        task.date?.let {
-            Spacer(modifier = Modifier.padding(16.dp))
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.align(Alignment.End)
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.DateRange,
-                    contentDescription = null
-                )
-                Text(
-                    text = task.date.toString()
-                )
-            }
-        }
-
         Spacer(modifier = Modifier.padding(4.dp))
 
-        HorizontalDivider(color = Color(task.category.color))
+        HorizontalDivider(color = Color(task.category.color).copy(alpha = 0.5f))
+
+        task.date?.let {
+            Spacer(modifier = Modifier.padding(4.dp))
+
+            DateWithIcon(
+                date = it,
+                modifier = Modifier.align(Alignment.End)
+            )
+        }
 
         Spacer(modifier = Modifier.padding(16.dp))
 
@@ -127,12 +124,12 @@ fun TaskDetailsBody(
             modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.padding(16.dp))
+        Spacer(modifier = Modifier.weight(1f))
 
         DetailsButtons(
             onNavigateToTaskForm = onNavigateToTaskForm,
             onDeleteTaskClick = onDeleteTaskClick,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.align(Alignment.End)
         )
     }
 }

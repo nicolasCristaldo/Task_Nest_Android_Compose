@@ -10,7 +10,9 @@ import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.nicolascristaldo.tasknest.R
 
 @Composable
 fun NotificationSwitchSection(
@@ -23,7 +25,8 @@ fun NotificationSwitchSection(
         modifier = modifier
     ) {
         Text(
-            text = "Enable notifications",
+            text = stringResource(R.string.enable_notifications),
+            style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.weight(1f)
         )
 
@@ -37,6 +40,5 @@ fun NotificationSwitchSection(
             onCheckedChange = { onCheckedChange() },
             modifier = Modifier.padding(start = 16.dp)
         )
-
     }
 }

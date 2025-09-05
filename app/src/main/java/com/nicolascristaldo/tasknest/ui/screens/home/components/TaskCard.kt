@@ -8,18 +8,18 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.nicolascristaldo.tasknest.domain.model.Task
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
-import java.util.TimeZone
+import com.nicolascristaldo.tasknest.ui.components.DateWithIcon
+import com.nicolascristaldo.tasknest.ui.components.StatusWithIcon
 
 @Composable
 fun TaskCard(
@@ -27,11 +27,6 @@ fun TaskCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).apply {
-        timeZone = TimeZone.getTimeZone("UTC")
-    }
-    val displayValue = task.date?.let { formatter.format(Date(it)) }
-
     OutlinedCard(
         onClick = onClick,
         border = BorderStroke(
@@ -45,15 +40,25 @@ fun TaskCard(
                 .padding(16.dp)
                 .fillMaxSize()
         ) {
-            Text(text = task.name)
+            Text(
+                text = task.name,
+                style = MaterialTheme.typography.titleMedium,
+                color = Color(task.category.color),
+                fontWeight = FontWeight.Bold
+            )
             Spacer(modifier = Modifier.padding(8.dp))
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(text = task.status.name)
-                if (displayValue != null) Text(text = displayValue)
+                StatusWithIcon(status = task.status)
+                if (task.date != null) {
+                    DateWithIcon(
+                        date = task.date,
+                        modifier = Modifier.padding(start = 8.dp)
+                    )
+                }
             }
         }
     }

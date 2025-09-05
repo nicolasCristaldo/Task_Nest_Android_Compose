@@ -60,7 +60,12 @@ fun AppTextField(
                     }
                 }
             },
-            label = { Text(text = label) },
+            label = {
+                Text(
+                    text = label,
+                    style = MaterialTheme.typography.labelLarge
+                )
+            },
             modifier = Modifier
                 .padding(bottom = 4.dp)
                 .fillMaxWidth()

@@ -53,7 +53,12 @@ fun DatePickerTextField(
                 )
             }
         },
-        label = { Text(text = label) },
+        label = {
+            Text(
+                text = label,
+                style = MaterialTheme.typography.labelLarge
+            )
+        },
         modifier = modifier
     )
 }
