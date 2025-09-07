@@ -10,8 +10,8 @@ import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.nicolascristaldo.tasknest.R
 
 @Composable
@@ -32,13 +32,13 @@ fun NotificationSwitchSection(
 
         VerticalDivider(
             color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.height(24.dp)
+            modifier = Modifier.height(dimensionResource(R.dimen.vertical_divider_height))
         )
 
         Switch(
             checked = checked,
             onCheckedChange = { onCheckedChange() },
-            modifier = Modifier.padding(start = 16.dp)
+            modifier = Modifier.padding(start = dimensionResource(R.dimen.medium_padding))
         )
     }
 }

@@ -14,8 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.nicolascristaldo.tasknest.R
 import com.nicolascristaldo.tasknest.domain.model.Category
 
@@ -27,7 +27,7 @@ fun CategoryChipsSection(
     modifier: Modifier = Modifier
 ) {
     Column(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.small_padding)),
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.fillMaxWidth()
     ) {
@@ -49,7 +49,7 @@ fun CategoryChipsSection(
                     colors = FilterChipDefaults.filterChipColors(
                         selectedLabelColor = Color(category.color)
                     ),
-                    modifier = Modifier.padding(horizontal = 4.dp)
+                    modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.extra_small_padding))
                 )
             }
         }

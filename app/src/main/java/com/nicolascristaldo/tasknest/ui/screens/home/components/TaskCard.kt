@@ -15,8 +15,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
+import com.nicolascristaldo.tasknest.R
 import com.nicolascristaldo.tasknest.domain.model.Task
 import com.nicolascristaldo.tasknest.ui.components.DateWithIcon
 import com.nicolascristaldo.tasknest.ui.components.StatusWithIcon
@@ -30,14 +31,14 @@ fun TaskCard(
     OutlinedCard(
         onClick = onClick,
         border = BorderStroke(
-            width = 1.dp,
+            width = dimensionResource(R.dimen.medium_border_width),
             color = Color(task.category.color).copy(alpha = 0.5f)
         ),
         modifier = modifier
     ) {
         Column(
             modifier = Modifier
-                .padding(16.dp)
+                .padding(dimensionResource(R.dimen.medium_padding))
                 .fillMaxSize()
         ) {
             Text(
@@ -46,7 +47,7 @@ fun TaskCard(
                 color = Color(task.category.color),
                 fontWeight = FontWeight.Bold
             )
-            Spacer(modifier = Modifier.padding(8.dp))
+            Spacer(modifier = Modifier.padding(dimensionResource(R.dimen.small_padding)))
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
@@ -56,7 +57,7 @@ fun TaskCard(
                 if (task.date != null) {
                     DateWithIcon(
                         date = task.date,
-                        modifier = Modifier.padding(start = 8.dp)
+                        modifier = Modifier.padding(start = dimensionResource(R.dimen.small_padding))
                     )
                 }
             }

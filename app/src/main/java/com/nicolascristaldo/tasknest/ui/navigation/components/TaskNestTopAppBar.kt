@@ -27,6 +27,7 @@ fun TaskNestTopAppBar(
             Text(
                 text = title,
                 style = MaterialTheme.typography.headlineLarge,
+                color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.Bold
             )
         },

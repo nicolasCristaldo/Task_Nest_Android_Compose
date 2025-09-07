@@ -9,37 +9,34 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.TextStyle
 import com.nicolascristaldo.tasknest.R
 import com.nicolascristaldo.tasknest.domain.model.Status
 
 @Composable
 fun StatusWithIcon(
     status: Status,
+    textStyle: TextStyle = MaterialTheme.typography.labelLarge,
+    iconSize: Int = R.dimen.small_icon_size,
     modifier: Modifier = Modifier
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.small_padding)),
         modifier = modifier
     ) {
-        val icon = when (status) {
-            Status.PENDING -> R.drawable.ic_pending
-            Status.IN_PROGRESS -> R.drawable.ic_in_progress
-            Status.COMPLETED -> R.drawable.ic_completed
-        }
-
         Text(
             text = status.name.replace('_', ' '),
-            style = MaterialTheme.typography.labelLarge
+            style = textStyle
         )
 
         Icon(
-            painter = painterResource(id = icon),
+            painter = painterResource(id = status.icon),
             contentDescription = null,
             tint = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.size(16.dp)
+            modifier = Modifier.size(dimensionResource(iconSize))
         )
     }
 }

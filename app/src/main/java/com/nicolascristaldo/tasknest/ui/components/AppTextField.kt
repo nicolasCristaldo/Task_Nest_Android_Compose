@@ -16,8 +16,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.nicolascristaldo.tasknest.R
 
 @Composable
@@ -33,7 +33,7 @@ fun AppTextField(
     var isFirstTime by remember { mutableStateOf(true) }
 
     Column(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.small_padding)),
         horizontalAlignment = Alignment.Start,
         modifier = modifier
     ) {
@@ -67,7 +67,7 @@ fun AppTextField(
                 )
             },
             modifier = Modifier
-                .padding(bottom = 4.dp)
+                .padding(bottom = dimensionResource(R.dimen.extra_small_padding))
                 .fillMaxWidth()
         )
     }

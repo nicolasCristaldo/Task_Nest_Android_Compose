@@ -18,17 +18,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nicolascristaldo.tasknest.R
 import com.nicolascristaldo.tasknest.domain.model.Task
 import com.nicolascristaldo.tasknest.ui.components.DateWithIcon
+import com.nicolascristaldo.tasknest.ui.screens.details.components.ChangeStatusCard
 import com.nicolascristaldo.tasknest.ui.screens.details.components.DeleteTaskDialog
 import com.nicolascristaldo.tasknest.ui.screens.details.components.DetailsButtons
-import com.nicolascristaldo.tasknest.ui.screens.details.components.StatusRow
 
 @Composable
 fun TaskDetailsScreen(
@@ -98,17 +98,17 @@ fun TaskDetailsBody(
         )
 
         task.description?.let {
-            Spacer(modifier = Modifier.padding(8.dp))
+            Spacer(modifier = Modifier.padding(dimensionResource(R.dimen.small_padding)))
 
             Text(text = it)
         }
 
-        Spacer(modifier = Modifier.padding(4.dp))
+        Spacer(modifier = Modifier.padding(dimensionResource(R.dimen.extra_small_padding)))
 
         HorizontalDivider(color = Color(task.category.color).copy(alpha = 0.5f))
 
         task.date?.let {
-            Spacer(modifier = Modifier.padding(4.dp))
+            Spacer(modifier = Modifier.padding(dimensionResource(R.dimen.extra_small_padding)))
 
             DateWithIcon(
                 date = it,
@@ -116,12 +116,14 @@ fun TaskDetailsBody(
             )
         }
 
-        Spacer(modifier = Modifier.padding(16.dp))
+        Spacer(modifier = Modifier.padding(dimensionResource(R.dimen.medium_padding)))
 
-        StatusRow(
+        ChangeStatusCard(
             status = task.status,
-            onStatusChange = onStatusChange,
-            modifier = Modifier.fillMaxWidth()
+            onClick = onStatusChange,
+            modifier = Modifier
+                .fillMaxWidth(.8f)
+                .align(Alignment.CenterHorizontally)
         )
 
         Spacer(modifier = Modifier.weight(1f))
@@ -133,3 +135,4 @@ fun TaskDetailsBody(
         )
     }
 }
+

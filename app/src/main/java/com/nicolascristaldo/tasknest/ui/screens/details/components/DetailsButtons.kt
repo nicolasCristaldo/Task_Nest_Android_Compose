@@ -9,7 +9,7 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.dimensionResource
 import com.nicolascristaldo.tasknest.R
 import com.nicolascristaldo.tasknest.ui.navigation.components.TaskNestFAB
 
@@ -20,7 +20,7 @@ fun DetailsButtons(
     modifier: Modifier = Modifier
 ) {
     Column(
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.medium_padding)),
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
@@ -28,7 +28,7 @@ fun DetailsButtons(
             onClick = onDeleteTaskClick,
             icon = Icons.Filled.Delete,
             contentDescription = R.string.delete_task,
-            modifier = Modifier.size(40.dp)
+            modifier = Modifier.size(dimensionResource(R.dimen.small_fab_size))
         )
 
         TaskNestFAB(

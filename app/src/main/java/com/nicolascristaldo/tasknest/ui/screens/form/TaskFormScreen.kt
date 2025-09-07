@@ -17,9 +17,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nicolascristaldo.tasknest.R
@@ -93,7 +93,7 @@ fun TaskFormBody(
                 modifier = Modifier.fillMaxWidth(.8f)
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.medium_padding)))
 
             AppTextField(
                 label = stringResource(R.string.description),
@@ -105,7 +105,7 @@ fun TaskFormBody(
                 modifier = Modifier.fillMaxWidth(.8f)
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.medium_padding)))
 
             DatePickerTextField(
                 label = stringResource(R.string.date),
@@ -118,7 +118,7 @@ fun TaskFormBody(
                     .clickable { changeDatePickerState(true) }
             )
 
-            Spacer(modifier = Modifier.height(34.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.large_padding)))
 
             NotificationSwitchSection(
                 checked = uiState.taskDetails.isNotificationEnabled,
@@ -132,14 +132,14 @@ fun TaskFormBody(
                 modifier = Modifier.fillMaxWidth(.8f)
             )
 
-            Spacer(modifier = Modifier.height(34.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.large_padding)))
 
             CategoryChipsSection(
                 selectedCategory = uiState.taskDetails.category,
                 onCategorySelected = { updateUiState(uiState.taskDetails.copy(category = it)) }
             )
 
-            Spacer(modifier = Modifier.height(64.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.extra_large_padding)))
 
             Button(
                 onClick = { onConfirm() },

@@ -10,7 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.dimensionResource
+import com.nicolascristaldo.tasknest.R
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -28,16 +29,18 @@ fun DateWithIcon(
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.small_padding)),
         modifier = modifier
     ) {
         Icon(
             imageVector = Icons.Filled.DateRange,
-            contentDescription = null
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.secondary
         )
         Text(
             text = displayValue,
-            style = MaterialTheme.typography.labelLarge
+            style = MaterialTheme.typography.labelLarge,
+            color = MaterialTheme.colorScheme.secondary
         )
     }
 }
