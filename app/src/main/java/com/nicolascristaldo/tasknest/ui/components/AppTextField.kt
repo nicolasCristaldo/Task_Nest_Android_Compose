@@ -1,11 +1,11 @@
 package com.nicolascristaldo.tasknest.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -47,15 +47,20 @@ fun AppTextField(
             isError = if (isFirstTime) false else isError,
             supportingText = {
                 if (limit != null) {
-                    Row {
+                    Box(modifier = Modifier.fillMaxWidth()) {
+                        if (isError && !isFirstTime && errorMessage != null) {
+                            Text(
+                                text = "* $errorMessage",
+                                color = MaterialTheme.colorScheme.error,
+                                modifier = Modifier
+                                    .wrapContentWidth(Alignment.Start)
+                                    .align(Alignment.TopStart)
+                                    .fillMaxWidth(.7f)
+                            )
+                        }
                         Text(
-                            text = if (isError && !isFirstTime) errorMessage?.let { "* $it" } ?: ""
-                            else "",
-                            color = MaterialTheme.colorScheme.error
-                        )
-                        Spacer(modifier = Modifier.weight(1f))
-                        Text(
-                            text = stringResource(R.string.limit_characters, value.length, limit)
+                            text = stringResource(R.string.limit_characters, value.length, limit),
+                            modifier = Modifier.align(Alignment.TopEnd)
                         )
                     }
                 }

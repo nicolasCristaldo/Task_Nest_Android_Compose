@@ -1,4 +1,4 @@
-package com.nicolascristaldo.tasknest.ui.screens.home.components
+package com.nicolascristaldo.tasknest.ui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -19,8 +19,6 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import com.nicolascristaldo.tasknest.R
 import com.nicolascristaldo.tasknest.domain.model.Task
-import com.nicolascristaldo.tasknest.ui.components.DateWithIcon
-import com.nicolascristaldo.tasknest.ui.components.StatusWithIcon
 
 @Composable
 fun TaskCard(

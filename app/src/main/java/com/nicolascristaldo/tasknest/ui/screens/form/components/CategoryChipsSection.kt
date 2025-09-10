@@ -43,7 +43,7 @@ fun CategoryChipsSection(
         ) {
             Category.entries.forEach { category ->
                 FilterChip(
-                    label = { Text(text = category.name) },
+                    label = { Text(text = stringResource(category.stringResId)) },
                     selected = category == selectedCategory,
                     onClick = { onCategorySelected(category) },
                     colors = FilterChipDefaults.filterChipColors(

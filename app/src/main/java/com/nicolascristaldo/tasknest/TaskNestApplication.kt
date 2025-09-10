@@ -19,8 +19,8 @@ class TaskNestApplication: Application() {
      * Creates a notification channel for task reminders.
      */
     private fun createNotificationChannel() {
-        val name = "Task Notifications"
-        val descriptionText = "Notifications for task reminders"
+        val name = getString(R.string.notification_channel_name)
+        val descriptionText = getString(R.string.notification_channel_description)
         val importance = NotificationManager.IMPORTANCE_DEFAULT
         val channel = NotificationChannel("TASK_CHANNEL_ID", name, importance).apply {
             description = descriptionText

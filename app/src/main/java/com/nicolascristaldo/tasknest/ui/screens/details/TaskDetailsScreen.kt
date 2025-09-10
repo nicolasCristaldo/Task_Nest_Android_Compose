@@ -86,7 +86,7 @@ fun TaskDetailsBody(
     ) {
 
         Text(
-            text = task.category.name,
+            text = stringResource(task.category.stringResId).uppercase(),
             style = MaterialTheme.typography.labelLarge,
             color = Color(task.category.color)
         )

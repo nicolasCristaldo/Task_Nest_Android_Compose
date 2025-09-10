@@ -4,8 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,9 +14,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nicolascristaldo.tasknest.R
-import com.nicolascristaldo.tasknest.domain.model.Task
 import com.nicolascristaldo.tasknest.ui.components.AppTextField
-import com.nicolascristaldo.tasknest.ui.screens.home.components.TaskCard
+import com.nicolascristaldo.tasknest.ui.components.TaskList
 
 @Composable
 fun HomeScreen(
@@ -35,7 +32,7 @@ fun HomeScreen(
         AppTextField(
             value = uiState.nameFilter ?: "",
             onValueChange = { viewModel.setNameFilter(it) },
-            label = "Search",
+            label = stringResource(R.string.search),
             modifier = Modifier.fillMaxWidth(.8f)
         )
 
@@ -49,35 +46,6 @@ fun HomeScreen(
                 onCardClick = onNavigateToTaskDetails,
                 modifier = Modifier.fillMaxSize()
             )
-        }
-    }
-}
-
-@Composable
-fun TaskList(
-    tasks: List<Task>,
-    onCardClick: (Int) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    LazyColumn(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-    ) {
-        if (tasks.isEmpty()) {
-            item {
-                Text(text = "No tasks found")
-            }
-        }
-        else {
-            items(tasks, key = { it.id }) { task ->
-                TaskCard(
-                    task = task,
-                    onClick = { onCardClick(task.id) },
-                    modifier = Modifier
-                        .padding(vertical = dimensionResource(R.dimen.small_padding))
-                        .fillMaxWidth()
-                )
-            }
         }
     }
 }

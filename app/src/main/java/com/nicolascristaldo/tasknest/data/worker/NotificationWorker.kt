@@ -25,10 +25,11 @@ class TaskNotificationWorker @Inject constructor(
             val taskId = inputData.getInt("TASK_ID", 0)
             val taskName = inputData.getString("TASK_NAME") ?: "Task"
             val taskDescription = inputData.getString("TASK_DESCRIPTION") ?: ""
+            val title = applicationContext.getString(R.string.task_reminder, taskName)
 
             val notification = NotificationCompat.Builder(applicationContext, "TASK_CHANNEL_ID")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle("Task Reminder: $taskName")
+                .setContentTitle(title)
                 .setContentText(taskDescription)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true)
