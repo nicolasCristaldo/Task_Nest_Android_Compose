@@ -5,6 +5,7 @@ import javax.inject.Inject
 
 /**
  * Use case for getting a task by its id.
+ * @param repository The task repository.
  */
 class GetTaskByIdUseCase @Inject constructor(
     private val repository: TaskRepository

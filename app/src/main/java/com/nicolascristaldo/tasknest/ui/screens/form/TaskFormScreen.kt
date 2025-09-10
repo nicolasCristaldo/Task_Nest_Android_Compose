@@ -122,6 +122,7 @@ fun TaskFormBody(
 
             NotificationSwitchSection(
                 checked = uiState.taskDetails.isNotificationEnabled,
+                enabled = uiState.isDateValid() && uiState.taskDetails.date != null,
                 onCheckedChange = {
                     updateUiState(
                         uiState.taskDetails.copy(

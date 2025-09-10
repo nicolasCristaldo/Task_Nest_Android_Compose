@@ -7,6 +7,7 @@ import javax.inject.Inject
 
 /**
  * Use case for retrieving tasks.
+ * @param taskRepository The task repository.
  */
 class GetTasksUseCase @Inject constructor(
     private val taskRepository: TaskRepository

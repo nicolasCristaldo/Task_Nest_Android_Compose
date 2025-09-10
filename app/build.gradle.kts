@@ -63,7 +63,11 @@ dependencies {
     //Hilt
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.hilt.android)
+    implementation(libs.hilt.work)
     ksp(libs.hilt.compiler)
+
+    //WorkManager
+    implementation(libs.androidx.work.runtime.ktx)
 
     testImplementation(libs.junit)
 

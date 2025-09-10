@@ -17,6 +17,7 @@ import com.nicolascristaldo.tasknest.R
 @Composable
 fun NotificationSwitchSection(
     checked: Boolean,
+    enabled: Boolean,
     onCheckedChange: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -27,17 +28,19 @@ fun NotificationSwitchSection(
         Text(
             text = stringResource(R.string.enable_notifications),
             style = MaterialTheme.typography.titleMedium,
+            color = if (enabled) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.outline,
             modifier = Modifier.weight(1f)
         )
 
         VerticalDivider(
-            color = MaterialTheme.colorScheme.onSurface,
+            color = if (enabled) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.outline,
             modifier = Modifier.height(dimensionResource(R.dimen.vertical_divider_height))
         )
 
         Switch(
             checked = checked,
             onCheckedChange = { onCheckedChange() },
+            enabled = enabled,
             modifier = Modifier.padding(start = dimensionResource(R.dimen.medium_padding))
         )
     }

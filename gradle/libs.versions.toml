@@ -11,8 +11,10 @@ composeBom = "2024.09.00"
 ksp = "2.0.20-1.0.24"
 room = "2.6.1"
 hilt = "2.51.1"
+hiltWork = "1.2.0"
 hiltNavigationCompose = "1.2.0"
 navigationCompose = "2.9.0"
+workManager = "2.10.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -42,6 +44,10 @@ room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hiltWork" }
+
+# work manager
+androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workManager" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
