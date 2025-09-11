@@ -39,6 +39,7 @@
     <string name="loading">Cargando…</string>
     <string name="search">Buscar</string>
     <string name="no_tasks_found">No se encontraron tareas</string>
+    <string name="notification_permission_denied">Permiso de notificaciones denegado</string>
 
     <!-- Notifications -->
     <string name="notification_channel_name">Notificaciones de Tareas</string>

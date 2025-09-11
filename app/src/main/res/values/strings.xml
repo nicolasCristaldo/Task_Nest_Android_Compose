@@ -38,6 +38,7 @@
     <string name="no_tasks_found">No tasks found</string>
     <string name="loading">Loading…</string>
     <string name="search">Search</string>
+    <string name="notification_permission_denied">Notification permission denied</string>
 
     <!-- Notifications -->
     <string name="notification_channel_name">Task Notifications</string>

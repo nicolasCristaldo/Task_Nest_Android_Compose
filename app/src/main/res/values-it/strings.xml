@@ -39,6 +39,7 @@
     <string name="loading">Caricamento…</string>
     <string name="search">Cerca</string>
     <string name="no_tasks_found">Nessuna attività trovata</string>
+    <string name="notification_permission_denied">Permesso di notifica negato</string>
 
     <!-- Notifications -->
     <string name="notification_channel_name">Notifiche Attività</string>
