@@ -37,16 +37,14 @@ fun TaskFormScreen(
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    LaunchedEffect(id) {
-        if (id != 0) viewModel.getTask(id)
-    }
+    LaunchedEffect(id) { if (id != 0) viewModel.getTask(id) }
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var showDatePicker by remember { mutableStateOf(false) }
+    val confirmButtonTextId = remember(id) { if (id == 0) R.string.create else R.string.edit }
 
     TaskFormBody(
-        confirmButtonText = if (id == 0) stringResource(R.string.create)
-        else stringResource(R.string.edit),
+        confirmButtonTextId = confirmButtonTextId,
         onConfirm = {
             if (id == 0) viewModel.saveTask() else viewModel.updateTask()
             onNavigateBack()
@@ -70,13 +68,15 @@ fun TaskFormScreen(
 
 @Composable
 fun TaskFormBody(
-    confirmButtonText: String,
+    confirmButtonTextId: Int,
     onConfirm: () -> Unit,
     uiState: FormUiState,
     updateUiState: (TaskDetails) -> Unit,
     changeDatePickerState: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val taskDetails = uiState.taskDetails
+
     LazyColumn(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -85,8 +85,8 @@ fun TaskFormBody(
         item {
             AppTextField(
                 label = stringResource(R.string.name),
-                value = uiState.taskDetails.name,
-                onValueChange = { updateUiState(uiState.taskDetails.copy(name = it)) },
+                value = taskDetails.name,
+                onValueChange = { updateUiState(taskDetails.copy(name = it)) },
                 limit = 30,
                 isError = !uiState.isNameValid(),
                 errorMessage = stringResource(R.string.name_error),
@@ -97,8 +97,8 @@ fun TaskFormBody(
 
             AppTextField(
                 label = stringResource(R.string.description),
-                value = uiState.taskDetails.description,
-                onValueChange = { updateUiState(uiState.taskDetails.copy(description = it)) },
+                value = taskDetails.description,
+                onValueChange = { updateUiState(taskDetails.copy(description = it)) },
                 limit = 200,
                 isError = !uiState.isDescriptionValid(),
                 errorMessage = stringResource(R.string.description_error),
@@ -109,7 +109,7 @@ fun TaskFormBody(
 
             DatePickerTextField(
                 label = stringResource(R.string.date),
-                value = uiState.taskDetails.date,
+                value = taskDetails.date,
                 isError = !uiState.isDateValid(),
                 errorMessage = stringResource(R.string.date_error),
                 onClick = { changeDatePickerState(true) },
@@ -121,23 +121,17 @@ fun TaskFormBody(
             Spacer(modifier = Modifier.height(dimensionResource(R.dimen.large_padding)))
 
             NotificationSwitchSection(
-                checked = uiState.taskDetails.isNotificationEnabled,
-                enabled = uiState.isDateValid() && uiState.taskDetails.date != null,
-                onCheckedChange = {
-                    updateUiState(
-                        uiState.taskDetails.copy(
-                            isNotificationEnabled = !uiState.taskDetails.isNotificationEnabled
-                        )
-                    )
-                },
+                checked = taskDetails.isNotificationEnabled,
+                enabled = uiState.isDateValid() && taskDetails.date != null,
+                onCheckedChange = { updateUiState(taskDetails.copy(isNotificationEnabled = it)) },
                 modifier = Modifier.fillMaxWidth(.8f)
             )
 
             Spacer(modifier = Modifier.height(dimensionResource(R.dimen.large_padding)))
 
             CategoryChipsSection(
-                selectedCategory = uiState.taskDetails.category,
-                onCategorySelected = { updateUiState(uiState.taskDetails.copy(category = it)) }
+                selectedCategory = taskDetails.category,
+                onCategorySelected = { updateUiState(taskDetails.copy(category = it)) }
             )
 
             Spacer(modifier = Modifier.height(dimensionResource(R.dimen.extra_large_padding)))
@@ -147,7 +141,7 @@ fun TaskFormBody(
                 enabled = uiState.isEntryValid()
             ) {
                 Text(
-                    text = confirmButtonText,
+                    text = stringResource(confirmButtonTextId),
                     fontWeight = FontWeight.Bold
                 )
             }

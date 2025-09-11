@@ -29,6 +29,8 @@
     <string name="description_error">A descrição é muito longa.</string>
     <string name="date_error">A data não pode estar no passado.</string>
     <string name="limit_characters">Limite: %d/%d</string>
+    <string name="save_task_error">Falha ao salvar a tarefa: %1$s</string>
+    <string name="update_task_error">Falha ao atualizar a tarefa: %1$s</string>
 
     <!-- Dialogs -->
     <string name="delete_task">Excluir Tarefa</string>

@@ -8,6 +8,7 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -18,9 +19,11 @@ import com.nicolascristaldo.tasknest.R
 fun NotificationSwitchSection(
     checked: Boolean,
     enabled: Boolean,
-    onCheckedChange: () -> Unit,
+    onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    LaunchedEffect(enabled) { if (!enabled && checked) onCheckedChange(false) }
+
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
@@ -39,7 +42,7 @@ fun NotificationSwitchSection(
 
         Switch(
             checked = checked,
-            onCheckedChange = { onCheckedChange() },
+            onCheckedChange = { onCheckedChange(it) },
             enabled = enabled,
             modifier = Modifier.padding(start = dimensionResource(R.dimen.medium_padding))
         )
