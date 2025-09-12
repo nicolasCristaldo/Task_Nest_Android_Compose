@@ -31,7 +31,6 @@ class HomeViewModelTest {
     @Before
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
-        //homeViewModel = HomeViewModel(getTasksUseCase)
     }
 
     @After

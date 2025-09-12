@@ -41,7 +41,9 @@ class DetailsViewModel @Inject constructor(
      * Deletes the current task.
      */
     fun deleteTask() = viewModelScope.launch {
-        deleteTaskUseCase(_task.value!!)
+        _task.value?.let { task ->
+            deleteTaskUseCase(task)
+        }
     }
 
     /**
