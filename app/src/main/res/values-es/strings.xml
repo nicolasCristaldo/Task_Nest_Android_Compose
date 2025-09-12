@@ -28,7 +28,7 @@
     <string name="name_error">El nombre debe tener entre 1 y 30 caracteres.</string>
     <string name="description_error">La descripción es demasiado larga.</string>
     <string name="date_error">La fecha no puede estar en el pasado.</string>
-    <string name="limit_characters">Límite: %d/%d</string>
+    <string name="limit_characters" formatted="false">Límite: %d/%d</string>
     <string name="save_task_error">Error al guardar la tarea: %1$s</string>
     <string name="update_task_error">Error al actualizar la tarea: %1$s</string>
 

@@ -59,17 +59,29 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
+    androidTestImplementation(libs.room.testing)
 
     //Hilt
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.hilt.android)
     implementation(libs.hilt.work)
     ksp(libs.hilt.compiler)
+    androidTestImplementation(libs.hilt.android.testing)
 
     //WorkManager
     implementation(libs.androidx.work.runtime.ktx)
+    androidTestImplementation(libs.work.testing)
+
+    //Mockk
+    testImplementation(libs.mockk)
+    androidTestImplementation(libs.mockk.android)
+
+    //Coroutines test
+    testImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
 
     testImplementation(libs.junit)
+    testImplementation(libs.kotlin.test)
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -28,7 +28,7 @@
     <string name="name_error">Il nome deve essere compreso tra 1 e 30 caratteri.</string>
     <string name="description_error">La descrizione è troppo lunga.</string>
     <string name="date_error">La data non può essere nel passato.</string>
-    <string name="limit_characters">Limite: %d/%d</string>
+    <string name="limit_characters" formatted="false">Limite: %d/%d</string>
     <string name="save_task_error">Errore durante il salvataggio dell\'attività: %1$s</string>
     <string name="update_task_error">Errore durante la modifica dell\'attività: %1$s</string>
 

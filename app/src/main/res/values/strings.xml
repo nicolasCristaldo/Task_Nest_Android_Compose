@@ -27,7 +27,7 @@
     <string name="name_error">Name must be between 1 and 30 characters.</string>
     <string name="description_error">Description too long.</string>
     <string name="date_error">Date must not be in the past.</string>
-    <string name="limit_characters">Limit: %d/%d"</string>
+    <string name="limit_characters" formatted="false">Limit: %d/%d"</string>
     <string name="save_task_error">Failed to save task: %1$s</string>
     <string name="update_task_error">Failed to update task: %1$s</string>
 
