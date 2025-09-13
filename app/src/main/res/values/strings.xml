@@ -1,3 +1,61 @@
 <resources>
+    <!-- App and Screen Titles -->
     <string name="app_name">Task Nest</string>
+    <string name="task_form">%s Task</string>
+    <string name="task_details">Task Details</string>
+
+    <!-- Actions -->
+    <string name="create">Create</string>
+    <string name="edit">Edit</string>
+    <string name="back_button">Back</string>
+    <string name="add_task">Add Task</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="change">Change</string>
+    <string name="delete">Delete</string>
+
+    <!-- Form Fields -->
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="date">Date</string>
+    <string name="select_date">Select Date</string>
+    <string name="select_category">Select a category</string>
+    <string name="enable_notifications">Enable notifications</string>
+    <string name="status">Status</string>
+
+    <!-- Error Messages -->
+    <string name="name_error">Name must be between 1 and 30 characters.</string>
+    <string name="description_error">Description too long.</string>
+    <string name="date_error">Date must not be in the past.</string>
+    <string name="limit_characters" formatted="false">Limit: %d/%d"</string>
+    <string name="save_task_error">Failed to save task: %1$s</string>
+    <string name="update_task_error">Failed to update task: %1$s</string>
+
+    <!-- Dialogs -->
+    <string name="delete_task">Delete Task</string>
+    <string name="delete_task_confirmation">Are you sure you want to delete this task?</string>
+
+    <!-- General Messages -->
+    <string name="task_not_found">Task not found</string>
+    <string name="no_tasks_found">No tasks found</string>
+    <string name="loading">Loading…</string>
+    <string name="search">Search</string>
+    <string name="notification_permission_denied">Notification permission denied</string>
+
+    <!-- Notifications -->
+    <string name="notification_channel_name">Task Notifications</string>
+    <string name="notification_channel_description">Notifications for task reminders</string>
+    <string name="task_reminder">Task Reminder: %1$s</string>
+
+    <!-- Task Categories -->
+    <string name="category_personal">Personal</string>
+    <string name="category_work">Work</string>
+    <string name="category_shopping">Shopping</string>
+    <string name="category_urgent">Urgent</string>
+    <string name="category_other">Other</string>
+
+    <!-- Task Statuses -->
+    <string name="status_in_progress">In Progress</string>
+    <string name="status_completed">Completed</string>
+    <string name="status_pending">Pending</string>
 </resources>

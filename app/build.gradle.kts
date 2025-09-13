@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -18,9 +20,13 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    lint {
+        disable += "NullSafeMutableLiveData"
+    }
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -49,11 +55,43 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    //Navigation
+    implementation(libs.androidx.navigation.compose)
+
+    //Room
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
+    androidTestImplementation(libs.room.testing)
+
+    //Hilt
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.work)
+    ksp(libs.hilt.compiler)
+    androidTestImplementation(libs.hilt.android.testing)
+
+    //WorkManager
+    implementation(libs.androidx.work.runtime.ktx)
+    androidTestImplementation(libs.work.testing)
+
+    //Mockk
+    testImplementation(libs.mockk)
+    androidTestImplementation(libs.mockk.android)
+
+    //Coroutines test
+    testImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+
     testImplementation(libs.junit)
+    testImplementation(libs.kotlin.test)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }

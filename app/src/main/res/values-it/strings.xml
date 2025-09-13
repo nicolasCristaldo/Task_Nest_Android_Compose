@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App and Screen Titles -->
+    <string name="app_name">Task Nest</string>
+    <string name="task_form">%s attività</string>
+    <string name="task_details">Dettagli dell\'Attività</string>
+
+    <!-- Actions -->
+    <string name="create">Crea</string>
+    <string name="edit">Modifica</string>
+    <string name="back_button">Indietro</string>
+    <string name="add_task">Aggiungi Attività</string>
+    <string name="confirm">Conferma</string>
+    <string name="cancel">Annulla</string>
+    <string name="change">Cambia</string>
+    <string name="delete">Elimina</string>
+
+    <!-- Form Fields -->
+    <string name="name">Nome</string>
+    <string name="description">Descrizione</string>
+    <string name="date">Data</string>
+    <string name="select_date">Seleziona Data</string>
+    <string name="select_category">Seleziona una categoria</string>
+    <string name="enable_notifications">Abilita notifiche</string>
+    <string name="status">Stato</string>
+
+    <!-- Error Messages -->
+    <string name="name_error">Il nome deve essere compreso tra 1 e 30 caratteri.</string>
+    <string name="description_error">La descrizione è troppo lunga.</string>
+    <string name="date_error">La data non può essere nel passato.</string>
+    <string name="limit_characters" formatted="false">Limite: %d/%d</string>
+    <string name="save_task_error">Errore durante il salvataggio dell\'attività: %1$s</string>
+    <string name="update_task_error">Errore durante la modifica dell\'attività: %1$s</string>
+
+    <!-- Dialogs -->
+    <string name="delete_task">Elimina Attività</string>
+    <string name="delete_task_confirmation">Sei sicuro di voler eliminare questa attività?</string>
+
+    <!-- General Messages -->
+    <string name="task_not_found">Attività non trovata</string>
+    <string name="loading">Caricamento…</string>
+    <string name="search">Cerca</string>
+    <string name="no_tasks_found">Nessuna attività trovata</string>
+    <string name="notification_permission_denied">Permesso di notifica negato</string>
+
+    <!-- Notifications -->
+    <string name="notification_channel_name">Notifiche Attività</string>
+    <string name="notification_channel_description">Promemoria per attività</string>
+    <string name="task_reminder">Promemoria Attività: %1$s</string>
+
+    <!-- Task Categories -->
+    <string name="category_personal">Personale</string>
+    <string name="category_work">Lavoro</string>
+    <string name="category_shopping">Spesa</string>
+    <string name="category_urgent">Urgente</string>
+    <string name="category_other">Altro</string>
+
+    <!-- Task Statuses -->
+    <string name="status_in_progress">In Corso</string>
+    <string name="status_completed">Completata</string>
+    <string name="status_pending">In Sospeso</string>
+</resources>

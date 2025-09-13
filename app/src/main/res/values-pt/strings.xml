@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App and Screen Titles -->
+    <string name="app_name">Task Nest</string>
+    <string name="task_form">%s tarefa</string>
+    <string name="task_details">Detalhes da Tarefa</string>
+
+    <!-- Actions -->
+    <string name="create">Criar</string>
+    <string name="edit">Editar</string>
+    <string name="back_button">Voltar</string>
+    <string name="add_task">Adicionar Tarefa</string>
+    <string name="confirm">Confirmar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="change">Alterar</string>
+    <string name="delete">Excluir</string>
+
+    <!-- Form Fields -->
+    <string name="name">Nome</string>
+    <string name="description">Descrição</string>
+    <string name="date">Data</string>
+    <string name="select_date">Selecionar Data</string>
+    <string name="select_category">Selecionar uma categoria</string>
+    <string name="enable_notifications">Ativar notificações</string>
+    <string name="status">Status</string>
+
+    <!-- Error Messages -->
+    <string name="name_error">O nome deve ter entre 1 e 30 caracteres.</string>
+    <string name="description_error">A descrição é muito longa.</string>
+    <string name="date_error">A data não pode estar no passado.</string>
+    <string name="limit_characters" formatted="false">Limite: %d/%d</string>
+    <string name="save_task_error">Falha ao salvar a tarefa: %1$s</string>
+    <string name="update_task_error">Falha ao atualizar a tarefa: %1$s</string>
+
+    <!-- Dialogs -->
+    <string name="delete_task">Excluir Tarefa</string>
+    <string name="delete_task_confirmation">Tem certeza de que deseja excluir esta tarefa?</string>
+
+    <!-- General Messages -->
+    <string name="task_not_found">Tarefa não encontrada</string>
+    <string name="loading">Carregando…</string>
+    <string name="no_tasks_found">Nenhuma tarefa encontrada</string>
+    <string name="search">Pesquisar</string>
+    <string name="notification_permission_denied">Permissão de notificação negada</string>
+
+    <!-- Notifications -->
+    <string name="notification_channel_name">Notificações de Tarefas</string>
+    <string name="notification_channel_description">Lembretes para tarefas</string>
+    <string name="task_reminder">Lembrete de Tarefa: %1$s</string>
+
+    <!-- Task Categories -->
+    <string name="category_personal">Pessoal</string>
+    <string name="category_work">Trabalho</string>
+    <string name="category_shopping">Compras</string>
+    <string name="category_urgent">Urgente</string>
+    <string name="category_other">Outro</string>
+
+    <!-- Task Statuses -->
+    <string name="status_in_progress">Em Andamento</string>
+    <string name="status_completed">Concluída</string>
+    <string name="status_pending">Pendente</string>
+</resources>
